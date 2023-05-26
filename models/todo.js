@@ -16,11 +16,11 @@ const todoSchema = new mongoose.Schema({
   },
   status: {
     type: Boolean,
-    default: false,
+    required: true,
   },
   date: {
     type: String,
-    require: true,
+    required: true,
   },
   time: {
     type: String,
