@@ -15,8 +15,9 @@ router.get("/todos", async (req, res) => {
 // Crear una nueva tarea
 router.post("/todos", async (req, res) => {
   try {
-    const { name, description, date, time } = req.body;
+    const { id, name, description, date, time } = req.body;
     const todo = new Todo({
+      id,
       name,
       description,
       date,
@@ -43,7 +44,12 @@ router.put("/todos/:id", async (req, res) => {
     );
     res.json(todo);
   } catch (error) {
-    res.status(500).json({ error: "Error al actualizar la tarea", description: error.message });
+    res
+      .status(500)
+      .json({
+        error: "Error al actualizar la tarea",
+        description: error.message,
+      });
   }
 });
 
@@ -54,7 +60,12 @@ router.delete("/todos/:id", async (req, res) => {
     await Todo.findByIdAndDelete(id);
     res.sendStatus(204);
   } catch (error) {
-    res.status(500).json({ error: "Error al eliminar la tarea", description: error.message});
+    res
+      .status(500)
+      .json({
+        error: "Error al eliminar la tarea",
+        description: error.message,
+      });
   }
 });
 
