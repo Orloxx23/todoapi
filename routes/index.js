@@ -15,9 +15,8 @@ router.get("/todos", async (req, res) => {
 // Crear una nueva tarea
 router.post("/todos", async (req, res) => {
   try {
-    const { id, name, description, date, time } = req.body;
+    const { name, description, date, time } = req.body;
     const todo = new Todo({
-      id,
       name,
       description,
       date,
