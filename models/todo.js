@@ -16,7 +16,7 @@ const todoSchema = new mongoose.Schema({
   },
   status: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   date: {
     type: String,

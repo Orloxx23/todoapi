@@ -36,10 +36,10 @@ router.post("/todos", async (req, res) => {
 router.put("/todos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, date, time } = req.body;
+    const { name, description, date, time, status } = req.body;
     const todo = await Todo.findByIdAndUpdate(
       id,
-      { name, description, date, time },
+      { name, description, date, time, status },
       { new: true }
     );
     res.json(todo);
