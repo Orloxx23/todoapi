@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const welcome = require("./routes/welcome");
 
 const app = express();
 
@@ -31,6 +32,7 @@ mongoose
 
 // Rutas
 app.use("/api", require("./routes/index"));
+app.use("/", welcome);
 
 // Iniciar el servidor
 app.listen(app.get("port"), () => {

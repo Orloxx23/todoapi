@@ -2,6 +2,39 @@ const { Router } = require("express");
 const Todo = require("../models/todo");
 const router = new Router();
 
+router.get("/", (req, res) => {
+  const data = {
+    nombre: "Lista de tareas",
+    description: "Aplicación para la gestión de tareas",
+    tecnologias: {
+        frontend: ["Java", "Retrofit"],
+        backend: ["Nodejs", "Express", "Mongoose", "MongoDB"],
+    },
+    integrantes: [
+        "Gicela Dominguez",
+        "Jeffrey Velez",
+        "Juan Estrada",
+        "Orlando Mina"
+    ],
+    endpoints: {
+        get: {
+            "/todos": "Obtener todas las tareas",
+        },
+        post: {
+            "/todos": "Crear una nueva tarea",
+        },
+        put: {
+            "/todos/:id": "Actualizar una tarea existente",
+        },
+        delete: {
+            "/todos/:id": "Eliminar una tarea",
+        },
+    },
+    
+  };
+  res.json(data);
+});
+
 // Obtener todas las tareas
 router.get("/todos", async (req, res) => {
   try {
@@ -44,12 +77,10 @@ router.put("/todos/:id", async (req, res) => {
     );
     res.json(todo);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        error: "Error al actualizar la tarea",
-        description: error.message,
-      });
+    res.status(500).json({
+      error: "Error al actualizar la tarea",
+      description: error.message,
+    });
   }
 });
 
@@ -60,12 +91,10 @@ router.delete("/todos/:id", async (req, res) => {
     await Todo.findByIdAndDelete(id);
     res.sendStatus(204);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        error: "Error al eliminar la tarea",
-        description: error.message,
-      });
+    res.status(500).json({
+      error: "Error al eliminar la tarea",
+      description: error.message,
+    });
   }
 });
 
